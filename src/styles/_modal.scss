@@ -1,0 +1,48 @@
+
+.ks-alert-container {
+  position:        fixed;
+  top:             0;
+  right:           0;
+  bottom:          0;
+  left:            0;
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+
+  .backdrop {
+    position:   absolute;
+    top:        0;
+    right:      0;
+    bottom:     0;
+    left:       0;
+    background: $backdrop-bg;
+  }
+
+  .alert {
+    display:        flex;
+    flex-direction: column;
+    position:       relative;
+    max-width:      $alert-max-width;
+    width:          $alert-width;
+    background:     $alert-background;
+    border:         $alert-border;
+    border-radius:  $alert-border-radius;
+  }
+
+  .icon-container {
+    text-align: center;
+    .alert-icon {
+      width:   27%;
+      display: inline-block;
+    }
+  }
+
+  .caption {
+    text-align: center;
+    font-size:  $caption-size;
+  }
+
+  .buttons-container {
+    text-align: center;
+  }
+}
