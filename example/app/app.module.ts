@@ -4,15 +4,17 @@ import { NgModule } from '@angular/core';
 import {AlertModule} from '../../src/alert.module';
 
 import { AppComponent } from './app.component';
+import { ExtendAlertComponent } from './components/extend-alert/extend-alert.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExtendAlertComponent
   ],
   imports: [
     BrowserModule,
-    AlertModule
+    AlertModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,20 +1,154 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ Ks }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
+  <section>
+    <h1 class="my-5 text-center">Welcome to KS Alert on Angular</h1>
+  </section>
+  <section>
+    <h2>Introduce</h2>
+    <hr>
 
+    <h3>Install</h3>
+    <pre><code class="language-ts">npm install ks-ng-alert --save</code></pre>
+    or
+    <pre><code class="language-ts">yarn add ks-ng-alert</code></pre>
+    <br>
+
+
+    <h3>Set up</h3>
+
+    <p>First, you have to add <code>AlertModule</code> to imports ( at *.module.ts)</p>
+    <pre><code class="language-typescript">imports: [
+    AlertModule.forRoot()
+  ]</code></pre>
+
+    <p>Second, you have to add scss to your project at (styles.scss or etc.)</p>
+    <pre><code class="language-scss">@import '~ks-ng-alert/src/styles.scss'</code></pre>
+    <br>
+
+
+    <h3>Using</h3>
+    <p>Inject AlertService to your component</p>
+    <pre><code class="language-typescript">  constructor(private alertService: AlertService) &#123;&#125;</code></pre>
+    <p>Trigger for view the alert</p>
+    <pre><code class="language-typescript">this.alert.create(&#123;caption: 'Hello', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] &#125;)</code></pre>
+    <button class="btn btn-primary"
+            (click)="createAlert({caption: 'Hello', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] })">
+      Example
+    </button>
+  </section>
+
+  <section class="mt-5">
+    <h2>Constructor</h2>
+    <hr>
+    <h3>Styles</h3>
+  </section>
+
+  <section class="mt-5">
+    <h2>Explanation</h2>
+    <hr>
+
+
+    <h3>Alert Types</h3>
+    Example of default alert types:
+    <button class="btn btn-warning"
+            (click)="createAlert({caption: 'Warning', alertType: AlertType.WARNING, alertButtons: [AlertButtonType.OK] })">
+      Warning
+    </button>
+    <button class="btn btn-danger"
+            (click)="createAlert({caption: 'Danger', alertType: AlertType.DANGER, alertButtons: [AlertButtonType.OK] })">
+      Danger
+    </button>
+    <button class="btn btn-info"
+            (click)="createAlert({caption: 'Info', alertType: AlertType.INFO, alertButtons: [AlertButtonType.OK] })">
+      Info
+    </button>
+    <button class="btn btn-success"
+            (click)="createAlert({caption: 'Success', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] })">
+      Success
+    </button>
+
+    <h3>Options</h3>
+    <h4>Text</h4>
+    <h4>Delay</h4>
+
+  </section>
+
+
+  <section class="mt-5">
+    <h2>Customisation</h2>
+    <hr>
+
+    <h3>Styles</h3>
+
+    <p>To change style of alert. You can easily set scss variables</p>
+    <pre><code class="language-scss">$backdrop-bg: rgba(255, 0, 0, 0.5);
+@import '~ks-ng-alert/src/styles.scss'</code></pre>
+    <p>For more information look at 'ks-alert/src/styles/_variables.scss' or on <a href="https://github.com/ks-angular/ks-alert/src/styles/variables">github</a>
+      <br>Also you can write own custom styles without importing ~ks-ng-alert/src/styles.</p>
+
+    <h3>Buttons</h3>
+    <p>For creating custom button you have to implement <a href="https://github.com/ks-angular/ks-alert/src/alert.interfaces.ts">IAlertButton</a></p>
+    <pre><code class="language-typescript">export class IAlertButton &#123;
+title?: string;
+classes?: string;
+type: AlertButtonType;
+&#125;</code></pre>
+    Example :
+    <pre><code class="language-typescript">alertButtons : [
+      &#123;classes: 'btn btn-success', title: 'Make order', type: AlertButtonType.CONFIRM&#125;,
+      &#123;classes: 'btn btn-primary', title: 'Back to shop', type: AlertButtonType.CANCEL&#125;
+      ]</code></pre>
+   <p>Variable 'type' used for determinate, does it confirm button, such as: CONFIRM, YES, OK, RETRY. If you needs more types you can extend enum with specific types.</p>
+
+    <h3>Custom Alert</h3>
+    <p>When you need to create custom alert form you have to extend <a href="">AlertComponent</a> and provide response.</p>
+<pre><code class="language-typescript">export class CustomAlertResponse extends IAlertResponse &#123;
+  alertText: string;
+&#125;
+
+@Component(&#123;
+  selector: 'ks-extend-alert',
+  templateUrl: './extend-alert.component.html',
+  styleUrls: ['./extend-alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+&#125;)
+export class ExtendAlertComponent extends AlertComponent &#123;
+
+  public inputText: string;
+
+  constructor(protected _elementRef: ElementRef,
+              protected _changeDetectorRef: ChangeDetectorRef) &#123;
+    super(_elementRef, _changeDetectorRef);
+  &#125;
+
+  submitClick() &#123;
+    const alertResponse: CustomAlertResponse = &#123;
+      request: this.request,
+      alertText: this.inputText,
+      responseButton: &#123;type: AlertButtonType.NONE&#125;,
+      confirm: true
+    &#125;;
+
+    this.emitResponse(alertResponse);
+  &#125;
+
+&#125;</code></pre>
+    Also set componentRef : <pre><code class="language-typescript">this.alert.create(&#123; componentRef: ExtendAlertComponent &#125;)</code></pre>
+
+  </section>
+
+
+  <footer>
+    <hr>
+    <div class="row">
+      <div class="col-12 col-sm-4">
+        <h6>Github :
+          <a href="https://github.com/ks-angular">ks-angular</a>,
+          <a href="https://github.com/ks-angular/ks-alert">ks-alert</a>
+        </h6>
+        <h6>Npm : <a href="https://npmjs.com/org/ks-angular">ks-angular</a></h6>
+      </div>
+    </div>
+
+    <h6 class="text-center"></h6>
+  </footer>
+</div>
