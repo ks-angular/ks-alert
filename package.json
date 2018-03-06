@@ -1,16 +1,26 @@
 {
   "name": "ks-alert",
   "version": "0.0.0",
+  "author": "Eugene Kamenskyi",
   "license": "MIT",
+  "private": true,
+  "keywords": [
+    "ks-alert",
+    "alert",
+    "alerts",
+    "angular",
+    "angular 4",
+    "notify",
+    "notifications"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod --aot --build-optimizer --no-sourcemap",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
