@@ -9,11 +9,14 @@ export const ALERT_BUTTONS: IAlertButton[] = [
     {classes: 'btn btn-primary', title: 'Abort', type: AlertButtonType.ABORT},
     {classes: 'btn btn-secondary', title: 'Cancel', type: AlertButtonType.CANCEL},
     {classes: 'btn btn-secondary', title: 'Ignore', type: AlertButtonType.IGNORE},
+    {classes: 'btn btn-primary', title: 'Confirm', type: AlertButtonType.CONFIRM},
+    {classes: 'btn btn-primary', title: 'Allow', type: AlertButtonType.ALLOW},
+    {classes: 'btn btn-primary', title: 'Deny', type: AlertButtonType.DENY},
 ];
 
 export const DEFAULT_OPTIONS: IAlertOptions = {
     overlay: true,
-    overlayClickToClose: true,
+    overlayClickToCancel: true,
     showCloseButton: true,
     duration: null
 };

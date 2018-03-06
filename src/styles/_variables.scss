@@ -1,20 +1,33 @@
 /*
  * Backdrop
  */
-$backdrop-bg: rgba(0, 0, 0, 0.5) !default;
+$backdrop-bg:         rgba(0, 0, 0, 0.5) !default;
 
 /*
  * Alert
  */
+$alert-top:           25% !default;
+$alert-margin:        5% auto !default;
 $alert-max-width:     400px !default;
 $alert-width:         90% !default;
-$alert-background:    #f5f2f0 !default;
+$alert-background:    white !default;
 $alert-border:        1px solid transparent !default;
 $alert-border-radius: 0.25rem !default;
-$border-radius: 3px;
+$border-radius:       3px;
+
+/*
+ * Icon
+ */
+$icon-width:          24% !default;
 
 /*
  * Caption
  */
-$caption-size: 2.5rem !default;
+$caption-align:       center;
+$caption-size:        2rem !default;
 
+/*
+ * Buttons
+ */
+$buttons-margin:      10px 0 auto 0;
+$button-margin:       auto 5px;

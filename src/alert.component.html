@@ -1,4 +1,4 @@
-<div class="ks-alert-container" *ngIf="request && options">
+<ng-container *ngIf="request && options">
 
     <div class="backdrop" *ngIf="options.overlay" (click)="overlayClick()"></div>
 
@@ -45,6 +45,9 @@
 
         <div class="description"> {{ request.text }}</div>
 
+        <ng-template [ngTemplateOutlet]="request.templateRef"
+                     [ngTemplateOutletContext]="{alert: this}"></ng-template>
+
         <div class="buttons-container">
             <button *ngFor="let button of buttons"
                     class="{{ button.classes }}"
@@ -54,4 +57,4 @@
         </div>
     </div>
 
-</div>
+</ng-container>

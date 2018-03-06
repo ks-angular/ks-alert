@@ -1,4 +1,5 @@
-import {AlertComponent} from './alert.component';
+import { AlertComponent } from './alert.component';
+import { TemplateRef } from '@angular/core';
 
 export enum AlertType {
     NONE = 0,
@@ -17,12 +18,14 @@ export enum AlertButtonType {
     ABORT,
     CANCEL,
     IGNORE,
-    CONFIRM
+    CONFIRM,
+    ALLOW,
+    DENY
 }
 
 export interface IAlertOptions {
     overlay?: boolean;
-    overlayClickToClose?: boolean;
+    overlayClickToCancel?: boolean;
     showCloseButton?: boolean;
     duration?: number; // after time out alert will closed with CANCEL trigger
 }
@@ -40,10 +43,11 @@ export interface IAlertRequest {
     alertButtons?: (AlertButtonType | IAlertButton) [];
     options?: IAlertOptions;
     componentRef?: typeof AlertComponent;
+    templateRef?: TemplateRef<any>;
 }
 
 export class IAlertResponse {
     request: IAlertRequest;
     responseButton: IAlertButton;
-    confirm: boolean; // Equal to: CONFIRM, YES, OK, RETRY
+    confirm: boolean; // Equal to: CONFIRM, YES, OK, RETRY, ALLOW
 }

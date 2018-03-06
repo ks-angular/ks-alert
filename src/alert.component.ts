@@ -66,7 +66,7 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
             this.buttons = [];
             if (this.request.alertButtons) {
                 this.request.alertButtons.forEach((i) => {
-                    if (AlertType.hasOwnProperty(i.toString())) {
+                    if (AlertButtonType.hasOwnProperty(i.toString())) {
                         this.buttons.push(ALERT_BUTTONS[+i]);
                     } else if (i instanceof IAlertButton) {
                         this.buttons.push(i as IAlertButton);
@@ -93,7 +93,10 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        this._elementRef.nativeElement.querySelector('button').focus();
+        const btnFocused = this._elementRef.nativeElement.querySelector('button');
+        if (btnFocused) {
+            btnFocused.focus();
+        }
     }
 
     ngOnDestroy() {
@@ -108,6 +111,7 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
             confirm: (buttonType.type === AlertButtonType.CONFIRM ||
                 buttonType.type === AlertButtonType.YES ||
                 buttonType.type === AlertButtonType.OK ||
+                buttonType.type === AlertButtonType.ALLOW ||
                 buttonType.type === AlertButtonType.RETRY)
         };
 
@@ -122,7 +126,7 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     overlayClick() {
-        if (this.options.overlayClickToClose) {
+        if (this.options.overlayClickToCancel) {
             this.buttonClick({type: AlertButtonType.CANCEL});
         }
     }

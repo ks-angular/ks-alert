@@ -1,48 +1,52 @@
 
-.ks-alert-container {
-  position:        fixed;
-  top:             0;
-  right:           0;
-  bottom:          0;
-  left:            0;
-  display:         flex;
-  justify-content: center;
-  align-items:     center;
+.backdrop {
+  position:   fixed;
+  top:        0;
+  right:      0;
+  bottom:     0;
+  left:       0;
+  background: $backdrop-bg;
+}
 
-  .backdrop {
-    position:   absolute;
-    top:        0;
-    right:      0;
-    bottom:     0;
-    left:       0;
-    background: $backdrop-bg;
-  }
+.alert {
+  display:        flex;
+  flex-direction: column;
+  position:       fixed;
+  top:            $alert-top;
+  margin:         $alert-margin;
+  left:           0;
+  right:          0;
+  align-self:     center;
+  justify-self:   center;
 
-  .alert {
-    display:        flex;
-    flex-direction: column;
-    position:       relative;
-    max-width:      $alert-max-width;
-    width:          $alert-width;
-    background:     $alert-background;
-    border:         $alert-border;
-    border-radius:  $alert-border-radius;
-  }
+  max-width:      $alert-max-width;
+  width:          $alert-width;
+  background:     $alert-background;
+  border:         $alert-border;
+  border-radius:  $alert-border-radius;
+}
 
-  .icon-container {
-    text-align: center;
-    .alert-icon {
-      width:   27%;
-      display: inline-block;
-    }
-  }
-
-  .caption {
-    text-align: center;
-    font-size:  $caption-size;
-  }
-
-  .buttons-container {
-    text-align: center;
+.icon-container {
+  text-align: center;
+  .alert-icon {
+    width:   $icon-width;
+    display: inline-block;
   }
 }
+
+.caption {
+  text-align: $caption-align;
+  font-size:  $caption-size;
+}
+
+.buttons-container {
+  display:   flex;
+  flex-wrap: wrap;
+  margin:    $buttons-margin;
+
+  .btn {
+    flex:   1;
+    margin: $button-margin;
+  }
+}
+
