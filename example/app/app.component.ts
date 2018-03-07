@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { AlertService } from '../../src/alert.service';
 import { AlertType, IAlertRequest, AlertButtonType } from '../../src/alert.interfaces';
+import { ExtendAlertComponent } from './components/extend-alert/extend-alert.component';
 
 @Component({
   selector: 'ks-root',
@@ -11,12 +12,49 @@ export class AppComponent {
   AlertType = AlertType;
   AlertButtonType = AlertButtonType;
 
-  public defaultAlert: IAlertRequest = {
+  public cntrAlert: IAlertRequest = {
     caption: 'Alert caption',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn s',
+    options: {
+      overlayClickToCancel: true,
+      showCloseButton: true,
+      overlay: true,
+      duration: 10000
+    },
+    alertButtons: [AlertButtonType.YES, AlertButtonType.NO, AlertButtonType.CANCEL]
   };
 
-  constructor(private alertService: AlertService) {}
+  public tmpltAlert: IAlertRequest = {
+    alertType: AlertType.SUCCESS,
+    caption: 'Alert caption',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn s',
+    alertButtons: [AlertButtonType.YES, AlertButtonType.NO, AlertButtonType.CANCEL]
+  };
+
+  public alertTypes = [
+    {label: 'AlertType.NONE', value: AlertType.NONE},
+    {label: 'AlertType.SUCCESS', value: AlertType.SUCCESS},
+    {label: 'AlertType.WARNING', value: AlertType.WARNING},
+    {label: 'AlertType.DANGER', value: AlertType.DANGER},
+    {label: 'AlertType.INFO', value: AlertType.INFO},
+  ];
+  public selectedAlertType = this.alertTypes[1];
+
+  public alertButtonsTypes = [
+    {selected: true, value: AlertButtonType.YES, label: 'YES'},
+    {selected: false, value: AlertButtonType.OK, label: 'OK'},
+    {selected: false, value: AlertButtonType.RETRY, label: 'RETRY'},
+    {selected: true, value: AlertButtonType.NO, label: 'NO'},
+    {selected: false, value: AlertButtonType.ABORT, label: 'ABORT'},
+    {selected: true, value: AlertButtonType.CANCEL, label: 'CANCEL'},
+    {selected: false, value: AlertButtonType.IGNORE, label: 'IGNORE'},
+    {selected: false, value: AlertButtonType.CONFIRM, label: 'CONFIRM'},
+    {selected: false, value: AlertButtonType.ALLOW, label: 'ALLOW'},
+    {selected: false, value: AlertButtonType.DENY, label: 'DENY'},
+  ];
+
+  constructor(private alertService: AlertService) {
+  }
 
 
   createAlertAssign(base: IAlertRequest, modify: IAlertRequest) {
@@ -25,5 +63,23 @@ export class AppComponent {
 
   createAlert(req: IAlertRequest) {
     this.alertService.create(req).subscribe();
+  }
+
+  createAlertCustom() {
+    this.alertService.create({componentRef: ExtendAlertComponent}).subscribe();
+  }
+
+  createRefAlert(req: IAlertRequest, templateRef: TemplateRef<any>) {
+    req.templateRef = templateRef;
+    this.alertService.create(req).subscribe();
+  }
+
+  cntrSelectAlertType(selected) {
+    this.cntrAlert.alertType = selected.value;
+  }
+
+  cntrSelectAlertButtonType() {
+    this.cntrAlert.alertButtons = [];
+    this.alertButtonsTypes.forEach(i => i.selected ? this.cntrAlert.alertButtons.push(i.value) : true);
   }
 }

@@ -1,7 +1,15 @@
-<div class="container">
-  <section>
-    <h1 class="my-5 text-center">Welcome to KS Alert on Angular</h1>
+<header>
+  <section class="container py-5">
+    <h1 class="text-center">
+      <!--<img class="d-inline" src="./logo.png" height="80" width="80"/>-->
+      Welcome to KS Alert on Angular
+      <!--<img class="d-inline" src="https://angular.io/assets/images/logos/angular/shield-large.svg" height="80"-->
+      <!--width="80"/>-->
+    </h1>
+    <p class="text-center font-weight-bold">Alert module with full customisation and agile to modify </p>
   </section>
+</header>
+<main class="container">
   <section>
     <h2>Introduce</h2>
     <hr>
@@ -36,57 +44,102 @@
     </button>
   </section>
 
-  <section class="mt-5">
-    <h2>Constructor</h2>
-    <hr>
-    <h3>Styles</h3>
+  <section class="mt-5 row">
+    <div class="col-12">
+      <h2>Constructor</h2>
+      <hr>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <h4>Alert Request</h4>
+      <div class="form-group row no-gutters">
+        <div class="col-5">
+          <label>Caption</label>
+        </div>
+
+        <div class="col-7">
+          <input class="form-control" type="text" [(ngModel)]="cntrAlert.caption"/>
+        </div>
+      </div>
+      <div class="form-group row no-gutters">
+        <div class="col-5">
+          <label>Text</label>
+        </div>
+
+        <div class="col-7">
+          <input class="form-control" type="text" [(ngModel)]="cntrAlert.text"/>
+        </div>
+      </div>
+
+      <h4>Alert type</h4>
+      <div class="form-group row no-gutters">
+        <div class="col-5">
+          <label>Alert type</label>
+        </div>
+
+        <div class="col-7">
+          <select class="btn-block" [(ngModel)]="selectedAlertType" (change)="cntrSelectAlertType(selectedAlertType)">
+            <option *ngFor="let c of alertTypes" [ngValue]="c">{{c.label}}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <h4>Alert option</h4>
+      <div class="form-group">
+        <input type="checkbox" [(ngModel)]="cntrAlert.options.overlay"/>
+        <label>Show overlay</label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" [(ngModel)]="cntrAlert.options.overlayClickToCancel"/>
+        <label>Overlay click to cancel</label>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" [(ngModel)]="cntrAlert.options.showCloseButton"/>
+        <label>Show close button</label>
+      </div>
+      <div class="form-group row no-gutters">
+        <div class="col-7">
+          <label>Duration (auto cancel after timeout)</label>
+        </div>
+        <div class="col-5">
+          <input class="form-control" type="text" [(ngModel)]="cntrAlert.options.duration">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <h4>Alert buttons types</h4>
+      <div class="form-group row">
+        <div class="col-6" *ngFor="let abt of alertButtonsTypes">
+          <input type="checkbox" [(ngModel)]="abt.selected" (ngModelChange)="cntrSelectAlertButtonType()"/>
+          <label>{{ abt.label }}</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block btn-lg" (click)="createAlert(cntrAlert)">Create</button>
+      </div>
+    </div>
+
   </section>
-
-  <section class="mt-5">
-    <h2>Explanation</h2>
-    <hr>
-
-
-    <h3>Alert Types</h3>
-    Example of default alert types:
-    <button class="btn btn-warning"
-            (click)="createAlert({caption: 'Warning', alertType: AlertType.WARNING, alertButtons: [AlertButtonType.OK] })">
-      Warning
-    </button>
-    <button class="btn btn-danger"
-            (click)="createAlert({caption: 'Danger', alertType: AlertType.DANGER, alertButtons: [AlertButtonType.OK] })">
-      Danger
-    </button>
-    <button class="btn btn-info"
-            (click)="createAlert({caption: 'Info', alertType: AlertType.INFO, alertButtons: [AlertButtonType.OK] })">
-      Info
-    </button>
-    <button class="btn btn-success"
-            (click)="createAlert({caption: 'Success', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] })">
-      Success
-    </button>
-
-    <h3>Options</h3>
-    <h4>Text</h4>
-    <h4>Delay</h4>
-
-  </section>
-
 
   <section class="mt-5">
     <h2>Customisation</h2>
     <hr>
 
-    <h3>Styles</h3>
+    <h3>Custom styles</h3>
 
     <p>To change style of alert. You can easily set scss variables</p>
     <pre><code class="language-scss">$backdrop-bg: rgba(255, 0, 0, 0.5);
 @import '~ks-ng-alert/src/styles.scss'</code></pre>
-    <p>For more information look at 'ks-alert/src/styles/_variables.scss' or on <a href="https://github.com/ks-angular/ks-alert/src/styles/variables">github</a>
+    <p>For more information look at 'ks-alert/src/styles/_variables.scss' or on <a
+      href="https://github.com/ks-angular/ks-alert/src/styles/variables">github</a>
       <br>Also you can write own custom styles without importing ~ks-ng-alert/src/styles.</p>
 
-    <h3>Buttons</h3>
-    <p>For creating custom button you have to implement <a href="https://github.com/ks-angular/ks-alert/src/alert.interfaces.ts">IAlertButton</a></p>
+    <h3>Custom buttons</h3>
+    <p>For creating custom button you have to implement <a
+      href="https://github.com/ks-angular/ks-alert/src/alert.interfaces.ts">IAlertButton</a></p>
     <pre><code class="language-typescript">export class IAlertButton &#123;
 title?: string;
 classes?: string;
@@ -97,11 +150,47 @@ type: AlertButtonType;
       &#123;classes: 'btn btn-success', title: 'Make order', type: AlertButtonType.CONFIRM&#125;,
       &#123;classes: 'btn btn-primary', title: 'Back to shop', type: AlertButtonType.CANCEL&#125;
       ]</code></pre>
-   <p>Variable 'type' used for determinate, does it confirm button, such as: CONFIRM, YES, OK, RETRY. If you needs more types you can extend enum with specific types.</p>
+    <p>Variable 'type' used for determinate, does it confirm button, such as: CONFIRM, YES, OK, RETRY, ALLOW. If you
+      needs more
+      types you can extend enum with specific types.</p>
+
+    <h3>Custom TemplateRef</h3>
+    <p>Alert give you possibility to pass template thought IAlertRequest</p>
+
+    <ng-template #alertTemplate>
+      <h1>Text from template</h1>
+    </ng-template>
+
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="createRefAlert(tmpltAlert, alertTemplate)">Example</button>
+    </div>
+    *-component.ts
+    <pre><code class="language-typescript">  public tmpltAlert: IAlertRequest = &#123;
+    alertType: AlertType.SUCCESS,
+    caption: 'Alert caption',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn s',
+    alertButtons: [AlertButtonType.YES, AlertButtonType.NO, AlertButtonType.CANCEL]
+  &#125;;
+
+  createRefAlert(req: IAlertRequest, templateRef: TemplateRef&#60;any&#62;) &#123;
+    req.templateRef = templateRef;
+    this.alertService.create(req).subscribe();
+  &#125;</code></pre>
+    <br>
+    *-component.html
+    <pre><code class="language-html">&#60;ng-template #alertTemplate&#62;
+      &#60;h1&#62;Text from template&#60;/h1&#62;
+&#60;/ng-template&#62;
+&#60;button class="btn btn-primary" (click)="createRefAlert(tmpltAlert, alertTemplate)"&#62;Example&#60;/button&#62;</code></pre>
+
 
     <h3>Custom Alert</h3>
-    <p>When you need to create custom alert form you have to extend <a href="">AlertComponent</a> and provide response.</p>
-<pre><code class="language-typescript">export class CustomAlertResponse extends IAlertResponse &#123;
+    <p>When you need to create custom alert form, you have to extend <a href="">AlertComponent</a> and provide response.
+    </p>
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="createAlertCustom()">Example</button>
+    </div>
+    <pre><code class="language-typescript">export class CustomAlertResponse extends IAlertResponse &#123;
   alertText: string;
 &#125;
 
@@ -132,7 +221,25 @@ export class ExtendAlertComponent extends AlertComponent &#123;
   &#125;
 
 &#125;</code></pre>
-    Also set componentRef : <pre><code class="language-typescript">this.alert.create(&#123; componentRef: ExtendAlertComponent &#125;)</code></pre>
+    Also set componentRef :
+    <pre><code
+      class="language-typescript">this.alert.create(&#123; componentRef: ExtendAlertComponent &#125;)</code></pre>
+
+    Do not forget add to entryComponents
+    <pre><code
+      class="language-typescript">@NgModule(&#123;
+    declarations: [
+    AppComponent,
+    ExtendAlertComponent
+    ],
+    imports: [
+    BrowserModule,
+    AlertModule.forRoot()
+    ],
+    entryComponents:[ExtendAlertComponent],
+    bootstrap: [AppComponent]
+    &#125;)</code></pre>
+
 
   </section>
 
@@ -151,4 +258,4 @@ export class ExtendAlertComponent extends AlertComponent &#123;
 
     <h6 class="text-center"></h6>
   </footer>
-</div>
+</main>
