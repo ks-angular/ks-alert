@@ -13,11 +13,10 @@ export class AlertService {
     }
 
     create(req: IAlertRequest): Observable<IAlertResponse> {
-
         if (req.componentRef === undefined || req.componentRef === null) {
             req.componentRef = AlertComponent;
         }
-        const componentRef = this._appendComponentToAppRoot(AlertComponent);
+        const componentRef = this._appendComponentToAppRoot(req.componentRef);
         componentRef.instance.config(req);
 
         componentRef.instance.eventResponse.subscribe(e => this._destroyComponent(componentRef));
