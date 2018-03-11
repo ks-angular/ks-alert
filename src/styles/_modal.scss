@@ -26,6 +26,19 @@
   border-radius:  $alert-border-radius;
 }
 
+.button-close {
+  position:  absolute;
+  top:       0;
+  right:     $btn-close-right;
+  font-size: $btn-close-font-size;
+  color:     $btn-close-color;
+  cursor:    pointer;
+  &:hover {
+    color:       $btn-close-hover-color;
+    text-shadow: $btn-close-hover-shadow;
+  }
+}
+
 .icon-container {
   text-align: center;
   .alert-icon {
