@@ -1,5 +1,7 @@
-<div class="backdrop"></div>
-<div class="alert">
+<div class="backdrop"
+     [ngClass]="{ appear:appear, disappear: disappear }"></div>
+<div class="alert"
+     [ngClass]="{ appear:appear, disappear: disappear }">
   <h4 class="text-center mt-3">Custom alert with input</h4>
   <div class="form-group">
     <label>Say hello, </label>

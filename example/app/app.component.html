@@ -2,11 +2,11 @@
   <section class="container py-5">
     <h1 class="text-center">
       <!--<img class="d-inline" src="./logo.png" height="80" width="80"/>-->
-      Welcome to KS Alert on Angular
+      Welcome to KS Alert on Angular 5+
       <!--<img class="d-inline" src="https://angular.io/assets/images/logos/angular/shield-large.svg" height="80"-->
       <!--width="80"/>-->
     </h1>
-    <p class="text-center font-weight-bold">Alert module with full customisation and agile to modify </p>
+    <p class="text-center font-weight-bold">Agile alert module with full customisation</p>
   </section>
 </header>
 <main class="container">
@@ -28,18 +28,18 @@
     AlertModule.forRoot()
   ]</code></pre>
 
-    <p>Second, you have to add scss to your project at (styles.scss or etc.)</p>
+    <p>Second, you have to add styles.scss to your project at (styles.scss or etc.)</p>
     <pre><code class="language-scss">@import '~ks-ng-alert/src/styles.scss'</code></pre>
     <br>
 
 
-    <h3>Using</h3>
+    <h3>Usage</h3>
     <p>Inject AlertService to your component</p>
     <pre><code class="language-typescript">  constructor(private alertService: AlertService) &#123;&#125;</code></pre>
     <p>Trigger for view the alert</p>
-    <pre><code class="language-typescript">this.alert.create(&#123;caption: 'Hello', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] &#125;)</code></pre>
+    <pre><code class="language-typescript">this.alert.create(&#123;caption: 'Hello', iconType: IconType.SUCCESS, alertButtons: [AlertButtonType.OK] &#125;)</code></pre>
     <button class="btn btn-primary"
-            (click)="createAlert({caption: 'Hello', alertType: AlertType.SUCCESS, alertButtons: [AlertButtonType.OK] })">
+            (click)="createAlert({caption: 'Hello', iconType: IconType.SUCCESS, alertButtons: [AlertButtonType.OK] })">
       Example
     </button>
   </section>
@@ -71,10 +71,10 @@
         </div>
       </div>
 
-      <h4>Alert type</h4>
+      <h4>Icon type</h4>
       <div class="form-group row no-gutters">
         <div class="col-5">
-          <label>Alert type</label>
+          <label>Icon type</label>
         </div>
 
         <div class="col-7">
@@ -128,14 +128,20 @@
     <h2>Customisation</h2>
     <hr>
 
-    <h3>Custom styles</h3>
+    <h3>Configuration</h3>
+    <p>When you are importing AlertModule.forRoot() you can pass some configurations.</p>
+    <pre><code class="language-typescript">AlertModule.forRoot(&#123; options.overlay: false &#125;)</code></pre>
 
+    <h3>Custom styles</h3>
     <p>To change style of alert. You can easily set scss variables</p>
     <pre><code class="language-scss">$backdrop-bg: rgba(255, 0, 0, 0.5);
 @import '~ks-ng-alert/src/styles.scss'</code></pre>
     <p>For more information look at 'ks-alert/src/styles/_variables.scss' or on <a
       href="https://github.com/ks-angular/ks-alert/src/styles/variables">github</a>
-      <br>Also you can write own custom styles without importing ~ks-ng-alert/src/styles.</p>
+      <br>Also you can write custom styles without importing ~ks-ng-alert/src/styles or override:</p>
+    <pre><code class="language-scss">.backdrop &#123;
+  background: rgba(255, 255, 255, 0.4);
+      &#125;</code></pre>
 
     <h3>Custom buttons</h3>
     <p>For creating custom button you have to implement <a
@@ -143,16 +149,19 @@
     <pre><code class="language-typescript">export class IAlertButton &#123;
 title?: string;
 classes?: string;
-type: AlertButtonType;
+type?: AlertButtonType;
+isConfirm: boolean;
 &#125;</code></pre>
     Example :
     <pre><code class="language-typescript">alertButtons : [
-      &#123;classes: 'btn btn-success', title: 'Make order', type: AlertButtonType.CONFIRM&#125;,
-      &#123;classes: 'btn btn-primary', title: 'Back to shop', type: AlertButtonType.CANCEL&#125;
+      &#123;classes: 'btn btn-success', title: 'Make order', type: AlertButtonType.CONFIRM, isConfirm: true&#125;,
+      &#123;classes: 'btn btn-primary', title: 'Back to shop', type: AlertButtonType.CANCEL, isConfirm: false&#125;
       ]</code></pre>
-    <p>Variable 'type' used for determinate, does it confirm button, such as: CONFIRM, YES, OK, RETRY, ALLOW. If you
-      needs more
-      types you can extend enum with specific types.</p>
+
+    <h3>Custom icon</h3>
+    <p>When you need to use custom icon, just pass the object: </p>
+    <pre><code class="language-typescript">iconType :&#123;classes: '', src: '../assets/some.png'&#125;</code></pre>
+    <p></p>
 
     <h3>Custom TemplateRef</h3>
     <p>Alert give you possibility to pass template thought IAlertRequest</p>
@@ -166,7 +175,7 @@ type: AlertButtonType;
     </div>
     *-component.ts
     <pre><code class="language-typescript">  public tmpltAlert: IAlertRequest = &#123;
-    alertType: AlertType.SUCCESS,
+    iconType: IconType.SUCCESS,
     caption: 'Alert caption',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn s',
     alertButtons: [AlertButtonType.YES, AlertButtonType.NO, AlertButtonType.CANCEL]
@@ -190,6 +199,7 @@ type: AlertButtonType;
     <div class="form-group">
       <button class="btn btn-primary" (click)="createAlertCustom()">Example</button>
     </div>
+    *-component.ts
     <pre><code class="language-typescript">export class CustomAlertResponse extends IAlertResponse &#123;
   alertText: string;
 &#125;
@@ -204,9 +214,8 @@ export class ExtendAlertComponent extends AlertComponent &#123;
 
   public inputText: string;
 
-  constructor(protected _elementRef: ElementRef,
-              protected _changeDetectorRef: ChangeDetectorRef) &#123;
-    super(_elementRef, _changeDetectorRef);
+  constructor(protected injector: Injector) &#123;
+    super(injector);
   &#125;
 
   submitClick() &#123;
@@ -221,11 +230,27 @@ export class ExtendAlertComponent extends AlertComponent &#123;
   &#125;
 
 &#125;</code></pre>
+    *-component.html
+    <pre><code class="language-html">&#60;div class="backdrop"
+     [ngClass]="&#123; appear:appear, disappear: disappear &#125;"&#62;&#60;/div&#62;
+&#60;div class="alert"
+     [ngClass]="&#123; appear:appear, disappear: disappear &#125;"&#62;
+  &#60;h4 class="text-center mt-3"&#62;Custom alert with input&#60;/h4&#62;
+  &#60;div class="form-group"&#62;
+    &#60;label&#62;Say hello, &#60;/label&#62;
+    &#60;input type="text" class="form-control" [(ngModel)]="inputText" placeholder="Hello"&#62;
+  &#60;/div&#62;
+  &#60;button class="btn btn-primary" (click)="submitClick()"&#62;Submit&#60;/button&#62;
+&#60;/div&#62;
+</code></pre>
+    <p>Variables appear, disappear are boolean from the AlertComponent.
+      They are responsible for animations when Alert's popup appear or disappear</p>
+
     Also set componentRef :
     <pre><code
       class="language-typescript">this.alert.create(&#123; componentRef: ExtendAlertComponent &#125;)</code></pre>
 
-    Do not forget add to entryComponents
+    Do not forget to add to the entryComponents
     <pre><code
       class="language-typescript">@NgModule(&#123;
     declarations: [

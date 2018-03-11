@@ -1,6 +1,6 @@
 import { Component, TemplateRef } from '@angular/core';
 import { AlertService } from '../../src/alert.service';
-import { AlertType, IAlertRequest, AlertButtonType } from '../../src/alert.interfaces';
+import { IconType, IAlertRequest, AlertButtonType } from '../../src/alert.interfaces';
 import { ExtendAlertComponent } from './components/extend-alert/extend-alert.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { ExtendAlertComponent } from './components/extend-alert/extend-alert.com
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  AlertType = AlertType;
+  IconType = IconType;
   AlertButtonType = AlertButtonType;
 
   public cntrAlert: IAlertRequest = {
@@ -25,18 +25,18 @@ export class AppComponent {
   };
 
   public tmpltAlert: IAlertRequest = {
-    alertType: AlertType.SUCCESS,
+    iconType: IconType.SUCCESS,
     caption: 'Alert caption',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn s',
     alertButtons: [AlertButtonType.YES, AlertButtonType.NO, AlertButtonType.CANCEL]
   };
 
   public alertTypes = [
-    {label: 'AlertType.NONE', value: AlertType.NONE},
-    {label: 'AlertType.SUCCESS', value: AlertType.SUCCESS},
-    {label: 'AlertType.WARNING', value: AlertType.WARNING},
-    {label: 'AlertType.DANGER', value: AlertType.DANGER},
-    {label: 'AlertType.INFO', value: AlertType.INFO},
+    {label: 'IconType.NONE', value: IconType.NONE},
+    {label: 'IconType.SUCCESS', value: IconType.SUCCESS},
+    {label: 'IconType.WARNING', value: IconType.WARNING},
+    {label: 'IconType.DANGER', value: IconType.DANGER},
+    {label: 'IconType.INFO', value: IconType.INFO},
   ];
   public selectedAlertType = this.alertTypes[1];
 
@@ -75,7 +75,7 @@ export class AppComponent {
   }
 
   cntrSelectAlertType(selected) {
-    this.cntrAlert.alertType = selected.value;
+    this.cntrAlert.iconType = selected.value;
   }
 
   cntrSelectAlertButtonType() {
