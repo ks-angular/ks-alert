@@ -12,16 +12,13 @@ import { DEFAULT_CONFIG } from './alert.constants';
   exports: [AlertComponent]
 })
 export class AlertModule {
+
   static forRoot(alertConfig?: IAlertConfig): ModuleWithProviders {
-    let config = DEFAULT_CONFIG;
-    if (alertConfig) {
-      config = Object.assign(config, alertConfig);
-    }
     return {
       ngModule: AlertModule,
       providers: [
         AlertService,
-        {provide: 'alertConfig', useValue: config}
+        {provide: 'alertConfig', useValue: Object.assign(DEFAULT_CONFIG, alertConfig)}
       ]
     };
   }

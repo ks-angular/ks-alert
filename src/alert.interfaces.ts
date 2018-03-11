@@ -60,13 +60,13 @@ export class IAlertResponse {
 }
 
 export class IAlertConfig {
-  caption?: string;
-  text?: string;
-  iconType?: IconType | IAlertIcon;
-  alertButtons?: (AlertButtonType | IAlertButton) [];
+  // caption?: string;
+  // text?: string;
+  // iconType?: IconType | IAlertIcon;
+  // alertButtons?: (AlertButtonType | IAlertButton) [];
   options?: IAlertOptions;
   componentRef?: typeof AlertComponent;
-  templateRef?: TemplateRef<any>;
+  // templateRef?: TemplateRef<any>;
   alertButtonsResource?: IAlertButton[]; // sequential are the same as AlertButtonType enum
   rootElement?: any; // set parent of alertComponent
   timeoutBeforeDestroy?: number; // time for disappear animation
