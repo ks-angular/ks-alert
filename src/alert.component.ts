@@ -35,7 +35,10 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
   public options: IAlertOptions;
   public buttons: IAlertButton[];
 
-  @HostBinding('class.active') public active: boolean;
+  @HostBinding('class.disabled') public disabled: boolean;
+
+  public appear = false;
+  public disappear = false;
 
   protected elementRef: ElementRef;
   protected changeDetectorRef: ChangeDetectorRef;
@@ -46,7 +49,7 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
     this.changeDetectorRef = injector.get(ChangeDetectorRef);
     this.alertConfig = injector.get('alertConfig', {});
 
-    this.active = false;
+    this.disabled = true;
     this.request = {};
     this.options = Object.assign({}, this.alertConfig.options);
     this._subscriptions = [];
@@ -87,7 +90,8 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       }
 
-      this.active = true;
+      this.appear = true;
+      this.disabled = false;
       this.changeDetectorRef.markForCheck();
       this.changeDetectorRef.detectChanges();
     }
@@ -96,10 +100,14 @@ export class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this._subscriptions.push(
       this.eventResponse.subscribe((res) => {
-        this.active = false;
+        this.appear = false;
+        this.disappear = true;
+        this.disabled = true;
         if (this._previousFocus) {
           this._previousFocus.focus();
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
       }));
   }
 

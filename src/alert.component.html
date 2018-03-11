@@ -1,8 +1,12 @@
 <ng-container *ngIf="request && options">
 
-  <div class="backdrop" *ngIf="options.overlay" (click)="overlayClick()"></div>
+  <div class="backdrop"
+       *ngIf="options.overlay"
+       [ngClass]="{ appear: appear, disappear: disappear}"
+       (click)="overlayClick()"></div>
 
-  <div class="alert">
+  <div class="alert"
+       [ngClass]="{ appear: appear, disappear: disappear}">
     <div class="button-close" *ngIf="options.showCloseButton" (click)="buttonClick(cancelButton)">x</div>
 
     <div class="icon-container">

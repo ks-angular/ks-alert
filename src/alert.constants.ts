@@ -27,5 +27,6 @@ export const DEFAULT_CONFIG: IAlertConfig = {
   componentRef: AlertComponent,
   options: DEFAULT_OPTIONS,
   alertButtonsResource: ALERT_BUTTONS,
-  rootElement: document.body
+  rootElement: document.body,
+  timeoutBeforeDestroy: 600
 };

@@ -2,7 +2,8 @@
  * Backdrop
  */
 $backdrop-bg:                rgba(0, 0, 0, 0.5) !default;
-
+$backdrop-appear:            fadeIn .3s !default;
+$backdrop-disappear:         fadeOut .7s !default;
 /*
  * Alert
  */
@@ -13,7 +14,9 @@ $alert-width:                90% !default;
 $alert-background:           white !default;
 $alert-border:               1px solid transparent !default;
 $alert-border-radius:        0.25rem !default;
-$border-radius:              3px !default;
+
+$alert-appear:               fadeIn .6s !default;
+$alert-disappear:            fadeOut .6s !default;
 
 /*
  * Close button

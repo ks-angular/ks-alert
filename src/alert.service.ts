@@ -17,12 +17,15 @@ export class AlertService {
     if (req.componentRef === undefined || req.componentRef === null) {
       req.componentRef = this.alertConfig.componentRef;
     }
+    if (req.timeoutBeforeDestroy === undefined || req.timeoutBeforeDestroy === null) {
+      req.timeoutBeforeDestroy = this.alertConfig.timeoutBeforeDestroy;
+    }
     const componentRef = this._appendComponentToAppRoot(req.componentRef);
     componentRef.instance.config(req);
 
-    // TODO: add disappear animation
     componentRef.instance.eventResponse
-      .subscribe(e => setTimeout(() => this._destroyComponent(componentRef), 0));
+      .subscribe(e => setTimeout(() =>
+        this._destroyComponent(componentRef), req.timeoutBeforeDestroy));
 
     return componentRef.instance.eventResponse;
   }
