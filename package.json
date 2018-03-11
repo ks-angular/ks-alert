@@ -1,17 +1,20 @@
 {
-  "name": "ks-alert",
+  "name": "ks-ng-alert",
   "version": "0.0.0",
   "author": "Eugene Kamenskyi",
   "license": "MIT",
   "private": true,
   "keywords": [
-    "ks-alert",
+    "ks-angular",
+    "ks-ng-alert",
     "alert",
     "alerts",
     "angular",
-    "angular 4",
+    "angular 5",
     "notify",
-    "notifications"
+    "notifications",
+    "popup",
+    "popups"
   ],
   "scripts": {
     "ng": "ng",
@@ -22,7 +25,9 @@
     "e2e": "ng e2e"
   },
   "dependencies": {},
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@angular/common": ">5.0.0"
+  },
   "devDependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/cli": "1.6.8",
