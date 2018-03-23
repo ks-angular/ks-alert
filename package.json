@@ -4,6 +4,7 @@
   "author": "Eugene Kamenskyi",
   "license": "MIT",
   "private": true,
+  "main": "dist/index.js",
   "keywords": [
     "ks-angular",
     "ks-ng-alert",
@@ -19,7 +20,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot --build-optimizer --no-sourcemap --output-path docs --base-href ks-ng-alert",
+    "build": "tsc -p ./tsconfig-ngc.json",
+    "build:docs": "ng build --prod --aot --build-optimizer --no-sourcemap --output-path docs --base-href ks-ng-alert",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
