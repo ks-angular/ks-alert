@@ -1,0 +1,32 @@
+import { AfterViewInit, ChangeDetectorRef, ElementRef, Injector, OnDestroy, OnInit } from '@angular/core';
+import { IconType, IAlertButton, IAlertConfig, IAlertOptions, IAlertRequest, IAlertResponse } from './alert.interfaces';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+export declare class AlertComponent implements OnInit, AfterViewInit, OnDestroy {
+    protected injector: Injector;
+    IconType: typeof IconType;
+    private _subscriptions;
+    private _closeTimeOut;
+    protected _resSubject: Subject<IAlertResponse>;
+    readonly eventResponse: Observable<IAlertResponse>;
+    private _previousFocus;
+    cancelButton: IAlertButton;
+    request: IAlertRequest;
+    options: IAlertOptions;
+    buttons: IAlertButton[];
+    disabled: boolean;
+    appear: boolean;
+    disappear: boolean;
+    protected elementRef: ElementRef;
+    protected changeDetectorRef: ChangeDetectorRef;
+    protected alertConfig: IAlertConfig;
+    constructor(injector: Injector);
+    config(request: IAlertRequest): void;
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    buttonClick(buttonType: IAlertButton): void;
+    keyUp($event: any): void;
+    overlayClick(): void;
+    emitResponse(alertResponse: IAlertResponse): void;
+}
