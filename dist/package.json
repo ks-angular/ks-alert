@@ -4,7 +4,7 @@
   "author": "Eugene Kamenskyi",
   "license": "MIT",
   "private": true,
-  "main": "dist/index.js",
+  "main": "bundles/ks-ng-alert.umd.js",
   "keywords": [
     "ks-angular",
     "ks-ng-alert",
@@ -27,7 +27,9 @@
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.7.1"
+  },
   "peerDependencies": {
     "@angular/common": ">5.0.0"
   },
@@ -66,5 +68,9 @@
     "tslint": "~5.9.1",
     "typescript": "~2.5.3",
     "zone.js": "^0.8.19"
-  }
+  },
+  "module": "esm5/ks-ng-alert.js",
+  "es2015": "esm2015/ks-ng-alert.js",
+  "typings": "ks-ng-alert.d.ts",
+  "metadata": "ks-ng-alert.metadata.json"
 }
